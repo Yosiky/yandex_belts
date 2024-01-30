@@ -4,11 +4,10 @@
 
 template <class Key, class Value>
 Value &GetRefStrict(std::map<Key, Value> &m, const Key &k) {
-	auto iter = m.find(k);
-	if (iter == m.end()) {
-		throw (std::runtime_error("Key doesn't exist"));
+	if (auto iter = m.find(k); iter != m.end()) {
+		return (iter->second);
 	}
-	return (iter->second);
+	throw (std::runtime_error("Key doesn't exist"));
 }
 
 using namespace std;
