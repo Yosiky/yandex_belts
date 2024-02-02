@@ -18,7 +18,11 @@ all:
 	$(CC) $(CFLAGS) $(SRC_BASE_REGION) -I . -o $(NAME)
 
 packed:
-	tar -zcf arch.tar.gz $(SRC_BASE_REGION) $(HEADERS)
+	zip arch.zip $(SRC_BASE_REGION) $(HEADERS)
 
 unpacked:
-	tar -zxf arch.tar.gz
+	unzip arch.zip
+
+fclean: 
+	rm -rf $(NAME)
+	rm arch.zip
