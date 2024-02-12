@@ -82,16 +82,16 @@ int main(void) {
 			array.push_back(value);
 		} else if (command == "ComputeIncome") {
 			value.income = 0;
-			for (auto i = std::begin(array); i != std::end(array); ++i) {
-				if (!(i->point2 < value.point1 || value.point2 < i->point1)) {
-					value.income += static_cast<double>(std::min(value.point2, i->point2) - std::max(value.point1, i->point1)) * i->income;
-				}
-			}
-			// value.income = std::accumulate(array.begin(), array.end(), 0.0f, [ value ](const double &a, const Entry &b) {
-			// 	if (!(b.point2 < value.point1 || value.point2 < b.point1))
-			// 		return (a + static_cast<double>(std::min(value.point2, b.point2) - std::max(value.point1, b.point1)) * b.income);
-			// 	return (a);
-			// 	});
+			// for (auto i = std::begin(array); i != std::end(array); ++i) {
+			// 	if (!(i->point2 < value.point1 || value.point2 < i->point1)) {
+			// 		value.income += static_cast<double>(std::min(value.point2, i->point2) - std::max(value.point1, i->point1)) * i->income;
+			// 	}
+			// }
+			value.income = std::accumulate(array.begin(), array.end(), 0.0, [ value ](const double &a, const Entry &b) {
+				if (!(b.point2 < value.point1 || value.point2 < b.point1))
+					return (a + static_cast<double>(std::min(value.point2, b.point2) - std::max(value.point1, b.point1)) * b.income);
+				return (a);
+				});
 			std::cout << value.income << std::endl;
 		}
 		// std::cout << value.point1 << " " << value.point2 << std::endl;
